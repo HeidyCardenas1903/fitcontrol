@@ -1,6 +1,7 @@
 // Estructura general y navegación - Autora: Heidy Viviana Cardenas Soler
 import { NavLink, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import { AvisoDemo } from './Comunes.jsx';
 
 // Ruta protegida: si no hay sesión redirige al login; si el rol no coincide, al inicio
 export function RutaProtegida({ roles }) {
@@ -47,6 +48,7 @@ export function Layout() {
         </div>
       </header>
       <main className="contenido">
+        <AvisoDemo />
         <Outlet />
       </main>
       <footer className="pie">FitControl MVP · Datos ficticios con fines académicos · Ibero 2026</footer>
