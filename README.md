@@ -64,34 +64,3 @@ Para reiniciar la base de datos con los datos de prueba: `cd backend && npm run 
 cd backend && npm test     # 11 pruebas: reglas del negocio (unitarias) y API (integración con supertest)
 cd frontend && npm test    # 5 pruebas: componentes y reducer de sesión (Vitest + Testing Library)
 ```
-
-## Despliegue
-
-- **Front-end → GitHub Pages**: el flujo [`.github/workflows/deploy-frontend.yml`](.github/workflows/deploy-frontend.yml) compila `frontend/` y lo publica en `https://<usuario>.github.io/fitcontrol/` en cada `push` a `main`. Activar en *Settings → Pages → Source: GitHub Actions*.
-- **Back-end → Render (plan gratuito)**: *New Web Service* → carpeta raíz `backend`, comando de inicio `npm start`, variables `JWT_SECRET` y `CORS_ORIGIN=https://<usuario>.github.io`. Luego, en GitHub, crear la variable del repositorio `VITE_API_URL=https://<servicio>.onrender.com/api` y volver a ejecutar el flujo de Pages.
-
-## Estructura
-
-```
-fitcontrol/
-├── backend/                 (Julián)
-│   ├── src/
-│   │   ├── app.js           configuración de Express y rutas
-│   │   ├── server.js        arranque del servidor
-│   │   ├── db.js            esquema SQL y datos de prueba
-│   │   ├── reglas.js        reglas del negocio (vencimientos)
-│   │   ├── swagger.js       documentación OpenAPI
-│   │   ├── middleware/      auth (JWT), validar, errores
-│   │   └── routes/          auth, afiliados, membresias, clases
-│   └── tests/api.test.js
-├── frontend/                (Heidy)
-│   └── src/
-│       ├── App.jsx          rutas y navegación
-│       ├── context/         AuthContext (Context API + useReducer)
-│       ├── hooks/useApi.js  useState + useEffect
-│       ├── services/api.js  Axios
-│       ├── components/      Layout, rutas protegidas, componentes comunes
-│       ├── pages/           Login, Inicio, Afiliados, Membresias, Clases
-│       └── __tests__/
-└── docs/                    documento de la actividad y capturas
-```
