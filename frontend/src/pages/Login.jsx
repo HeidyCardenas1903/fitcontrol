@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-import { Alerta } from '../components/Comunes.jsx';
+import { Alerta, AvisoDemo } from '../components/Comunes.jsx';
 
 export default function Login() {
   const { usuario, iniciarSesion, cargando, error } = useAuth();
@@ -34,6 +34,7 @@ export default function Login() {
         </div>
         <form onSubmit={enviar} noValidate className="tarjeta">
           <h2>Iniciar sesión</h2>
+          <AvisoDemo />
           <Alerta>{errorLocal || error}</Alerta>
           <label>
             Correo
@@ -46,7 +47,7 @@ export default function Login() {
           <button className="btn btn-primario btn-bloque" disabled={cargando}>
             {cargando ? 'Ingresando…' : 'Ingresar'}
           </button>
-          <details className="ayuda">
+          <details className="ayuda" open>
             <summary>Usuarios de prueba</summary>
             <p>Administrador: admin@fitcontrol.test / Admin123*</p>
             <p>Afiliado: laura@fitcontrol.test / Afiliado123*</p>
