@@ -33,6 +33,8 @@ jobs:
         env:
           GITHUB_PAGES: 'true'
           VITE_API_URL: ${{ vars.VITE_API_URL }}
+          # Sin back-end publicado, se usa el modo demostración (API simulada en el navegador)
+          VITE_DEMO: ${{ vars.VITE_API_URL == '' && 'true' || 'false' }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/dist
