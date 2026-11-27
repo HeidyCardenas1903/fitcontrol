@@ -2,6 +2,7 @@
 // Centraliza la URL del back-end, agrega el token JWT a cada petición
 // y convierte los errores del servidor en mensajes claros para el usuario.
 import axios from 'axios';
+import { adaptadorDemo } from './demoApi.js';
 
 export const CLAVE_SESION = 'fitcontrol_sesion';
 
@@ -10,6 +11,10 @@ export const api = axios.create({
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
 });
+
+// Modo demostración (GitHub Pages): las peticiones se responden en el navegador
+export const MODO_DEMO = import.meta.env.VITE_DEMO === 'true';
+if (MODO_DEMO) api.defaults.adapter = adaptadorDemo;
 
 // Interceptor de petición: adjunta el token guardado
 api.interceptors.request.use((config) => {
