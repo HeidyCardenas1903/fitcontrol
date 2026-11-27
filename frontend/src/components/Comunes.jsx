@@ -1,5 +1,7 @@
 // Componentes reutilizables de la interfaz - Autora: Heidy Viviana Cardenas Soler
 import { useEffect } from 'react';
+import { MODO_DEMO } from '../services/api.js';
+import { reiniciarDemo } from '../services/demoApi.js';
 
 const ETIQUETAS = {
   vigente: 'Vigente',
@@ -77,3 +79,23 @@ export const fechaCorta = (iso) =>
 
 export const fechaHora = (iso) =>
   new Date(iso).toLocaleString('es-CO', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+
+// Aviso visible cuando la aplicación corre en GitHub Pages sin servidor
+export function AvisoDemo() {
+  if (!MODO_DEMO) return null;
+  const reiniciar = () => {
+    if (window.confirm('¿Volver a los datos de prueba iniciales?')) {
+      reiniciarDemo();
+      window.location.reload();
+    }
+  };
+  return (
+    <div className="aviso-demo" role="note">
+      <span>
+        <strong>Modo demostración:</strong> la API REST se simula en este navegador con las mismas reglas del
+        back-end; los cambios se guardan solo aquí. El servidor real está en la carpeta <code>backend/</code> del repositorio.
+      </span>
+      <button type="button" className="btn btn-secundario btn-pequeno" onClick={reiniciar}>Reiniciar datos</button>
+    </div>
+  );
+}
